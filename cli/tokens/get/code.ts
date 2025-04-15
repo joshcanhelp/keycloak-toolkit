@@ -44,8 +44,7 @@ Deno.serve({ port: LOCAL_SERVER_PORT }, async (request) => {
     const errorMsg = `Error returned from the server: ${
       requestUrl.searchParams.get("error_description") || "No description"
     } (${errorCode})`;
-    Logger().error(errorMsg);
-    Deno.exit(1);
+    throw new Error(errorMsg);
   }
 
   const responseState = requestUrl.searchParams.get("state");
@@ -53,15 +52,13 @@ Deno.serve({ port: LOCAL_SERVER_PORT }, async (request) => {
   if (invalidState) {
     const errorMsg =
       "Invalid or missing state parameter returned from Keycloak";
-    Logger().error(errorMsg);
-    Deno.exit(1);
+    throw new Error(errorMsg);
   }
 
   const authCode = requestUrl.searchParams.get("code");
   if (!authCode) {
     const errorMsg = "Missing auth code with valid state for some weird reason";
-    Logger().error(errorMsg);
-    Deno.exit(1);
+    throw new Error(errorMsg);
   }
 
   const tokenResponse = await tokenFetch({

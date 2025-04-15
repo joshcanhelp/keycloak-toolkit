@@ -5,16 +5,14 @@ import {
   tokenFetch,
   TokenOutputTypes,
 } from "./index.ts";
-import { Logger } from "../../utils/logger.ts";
 
 const { output, scope } = parseArgs(Deno.args, {
   string: ["output", "scope"],
 });
 
-export const run = async (refreshToken: string) => {
+export const run = async (refreshToken?: string) => {
   if (!refreshToken) {
-    Logger().error("Missing refresh token in command args");
-    Deno.exit(1);
+    throw new Error("Missing refresh token in command args");
   }
 
   const tokenFetchData: TokenEndpointData = {

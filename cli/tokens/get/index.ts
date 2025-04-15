@@ -77,14 +77,16 @@ export const run = async (args: string[]) => {
     await import("./code.ts");
   } else if (refreshCmds.includes(command)) {
     Logger().debug("Running refresh ...");
-    await (await import("./refresh.ts")).run(`${args[0]}`);
+    await (await import("./refresh.ts")).run(args[0]);
   } else {
     const validCmds = [...clientCmds, ...ropgCmds, ...codeCmds, ...refreshCmds];
-    Logger().error(`Valid commands are ${validCmds.join(", ")}`);
-    Deno.exit(1);
+    throw new Error(`Valid commands are ${validCmds.join(", ")}`);
   }
 };
 
+////
+/// Standard token endpoint interactions
+//
 export const tokenFetch = async ({
   data,
   clientId = KEYCLOAK_CLIENT_ID,
@@ -129,6 +131,9 @@ export const tokenFetch = async ({
   return await tokenResponse.json();
 };
 
+////
+/// Handle token endpoint response
+//
 export const handleResponse = (
   tokenResponse: TokenEndpointError | TokenEndpointSuccess,
   output?: TokenOutputTypes,
@@ -136,8 +141,7 @@ export const handleResponse = (
   if ("error_description" in tokenResponse) {
     const { error, error_description: description } =
       tokenResponse as TokenEndpointError;
-    Logger().error(description + (error ? ` (${error})` : ""));
-    Deno.exit(1);
+    throw new Error(description + (error ? ` (${error})` : ""));
   }
 
   if (!output || "raw" === output) {

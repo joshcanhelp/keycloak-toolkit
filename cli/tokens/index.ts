@@ -18,7 +18,6 @@ export const run = async (args: string[]) => {
     (await import("./decode.ts")).run(`${args[0]}`);
   } else {
     const validCmds = [...getCmds, ...jwtCmds, ...decodeCmds];
-    Logger().error(`Valid commands are ${validCmds.join(", ")}`);
-    Deno.exit(1);
+    throw new Error(`Valid commands are ${validCmds.join(", ")}`);
   }
 };
