@@ -21,7 +21,9 @@ export const getConfig = () => {
     return configuration;
   }
 
-  const DEBUG_MODE = ["yes", "true", "y"].includes(Deno.env.get("DEBUG") || "");
+  const DEBUG_MODE = ["yes", "true", "y", "1", "on", "👍", "✅"].includes(
+    Deno.env.get("DEBUG") || Deno.env.get("DEBUG_MODE") || "off",
+  );
   const KEYCLOAK_BASE_URL = Deno.env.get("KEYCLOAK_BASE_URL") ||
     "http://localhost:8081";
 

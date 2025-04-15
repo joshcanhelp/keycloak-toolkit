@@ -115,6 +115,9 @@ export const tokenFetch = async ({
     }
   }
 
+  Logger().debug("POST body:");
+  Logger().debug("  " + formData.toString().replaceAll("&", "\n  "));
+
   const fetchConfig = {
     method: "POST",
     body: formData,
