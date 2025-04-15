@@ -1,6 +1,7 @@
 
 let configuration: {
   DEBUG_MODE: boolean;
+  LOCAL_SERVER_PORT: number;
   KEYCLOAK_REALM: string;
   KEYCLOAK_CLIENT_ID: string;
   KEYCLOAK_CLIENT_SECRET: string;
@@ -42,6 +43,7 @@ export const getConfig = () => {
 
   configuration = {
     DEBUG_MODE,
+    LOCAL_SERVER_PORT: parseInt(Deno.env.get("LOCAL_SERVER_PORT") || "8888", 10),
     KEYCLOAK_REALM,
     KEYCLOAK_CLIENT_ID: Deno.env.get("KEYCLOAK_CLIENT_ID") || "",
     KEYCLOAK_CLIENT_SECRET: Deno.env.get("KEYCLOAK_CLIENT_SECRET") || "",
