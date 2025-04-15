@@ -64,7 +64,7 @@ export const run = async (args: string[]) => {
   const clientCmds = ["client", "cc"];
   const codeCmds = ["authcode", "code", "browser", "login"];
   const refreshCmds = ["refresh"];
-  const ropgCmds = ["ropg", "direct"];
+  const ropgCmds = ["ropg", "ropc", "direct"];
 
   if (clientCmds.includes(command)) {
     Logger().debug("Running client credentials ...");
