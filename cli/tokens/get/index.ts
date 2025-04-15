@@ -61,28 +61,28 @@ const {
 export const run = async (args: string[]) => {
   const command = `${args.shift()}`;
 
-  if (["client", "cc"].includes(command)) {
+  const clientCmds = ["client", "cc"];
+  const codeCmds = ["authcode", "code", "browser", "login"];
+  const refreshCmds = ["refresh"];
+  const ropgCmds = ["ropg", "direct"];
+
+  if (clientCmds.includes(command)) {
     Logger().debug("Running client credentials ...");
-    return await (await import("./client.ts")).run();
-  }
-
-  if (["ropg", "direct"].includes(command)) {
+    await (await import("./client.ts")).run();
+  } else if (ropgCmds.includes(command)) {
     Logger().debug("Running ROPG login...");
-    return await (await import("./ropg.ts")).run();
-  }
-
-  if (["authcode", "code", "browser"].includes(command)) {
+    await (await import("./ropg.ts")).run();
+  } else if (codeCmds.includes(command)) {
     Logger().debug("Running auth code login ...");
-    return (await import("./code.ts")).run();
-  }
-
-  if (["refresh"].includes(command)) {
+    await import("./code.ts");
+  } else if (refreshCmds.includes(command)) {
     Logger().debug("Running refresh ...");
-    return await (await import("./refresh.ts")).run(`${args[0]}`);
+    await (await import("./refresh.ts")).run(`${args[0]}`);
+  } else {
+    const validCmds = [...clientCmds, ...ropgCmds, ...codeCmds, ...refreshCmds];
+    Logger().error(`Valid commands are ${validCmds.join(", ")}`);
+    Deno.exit(1);
   }
-
-  Logger().error(`Unknown command ${command}`);
-  Deno.exit(1);
 };
 
 export const tokenFetch = async ({
@@ -107,7 +107,10 @@ export const tokenFetch = async ({
 
   const formData = new URLSearchParams();
   for (const key in data) {
-    formData.append(key, data[key as keyof TokenEndpointData] || "");
+    const formValue = data[key as keyof TokenEndpointData];
+    if (formValue) {
+      formData.append(key, formValue);
+    }
   }
 
   const fetchConfig = {

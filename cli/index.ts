@@ -3,12 +3,17 @@ import { Logger } from "./utils/logger.ts";
 
 const args = parseArgs(Deno.args)._ as string[];
 const command = `${args.shift()}`;
+const tokenCmds = ["tokens", "token"];
+const serverCmds = ["server", "issuer"];
 
-if (["tokens", "token"].includes(command)) {
+if (tokenCmds.includes(command)) {
   Logger().debug("Running tokens ...");
   await (await import("./tokens/index.ts")).run(args);
-  Deno.exit(0);
+} else if (serverCmds.includes(command)) {
+  Logger().debug("Running issuer ...");
+  await (await import("./issuer/index.ts")).run(args);
+} else {
+  const validCmds = [...tokenCmds, ...serverCmds];
+  Logger().error(`Valid commands are ${validCmds.join(", ")}`);
+  Deno.exit(1);
 }
-
-Logger().error(`Unknown command ${command}`);
-Deno.exit(1);
