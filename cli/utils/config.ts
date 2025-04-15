@@ -1,4 +1,3 @@
-
 let configuration: {
   DEBUG_MODE: boolean;
   LOCAL_SERVER_PORT: number;
@@ -21,7 +20,7 @@ export const getConfig = () => {
   if (configuration) {
     return configuration;
   }
-  
+
   const DEBUG_MODE = ["yes", "true", "y"].includes(Deno.env.get("DEBUG") || "");
   const KEYCLOAK_BASE_URL = Deno.env.get("KEYCLOAK_BASE_URL") ||
     "http://localhost:8081";
@@ -43,7 +42,10 @@ export const getConfig = () => {
 
   configuration = {
     DEBUG_MODE,
-    LOCAL_SERVER_PORT: parseInt(Deno.env.get("LOCAL_SERVER_PORT") || "8888", 10),
+    LOCAL_SERVER_PORT: parseInt(
+      Deno.env.get("LOCAL_SERVER_PORT") || "8888",
+      10,
+    ),
     KEYCLOAK_REALM,
     KEYCLOAK_CLIENT_ID: Deno.env.get("KEYCLOAK_CLIENT_ID") || "",
     KEYCLOAK_CLIENT_SECRET: Deno.env.get("KEYCLOAK_CLIENT_SECRET") || "",
@@ -54,7 +56,8 @@ export const getConfig = () => {
     KEYCLOAK_TOKEN_URL: keycloakOidcUrl + "token",
     KEYCLOAK_INTROSPECTION_URL: keycloakOidcUrl + "token/introspect",
     KEYCLOAK_JWKS_URL: keycloakOidcUrl + "certs",
-    KEYCLOAK_CONFIGURATION_URL: `${keycloakRealmUrl}/.well-known/openid-configuration`,
+    KEYCLOAK_CONFIGURATION_URL:
+      `${keycloakRealmUrl}/.well-known/openid-configuration`,
     KEYCLOAK_TEST_USER_USERNAME: "admin",
     KEYCLOAK_TEST_USER_PASSWORD: "admin",
   };

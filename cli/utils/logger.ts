@@ -1,6 +1,6 @@
 import { getConfig } from "./config.ts";
 
-const {DEBUG_MODE} = getConfig()
+const { DEBUG_MODE } = getConfig();
 
 export const Logger = () => {
   return {

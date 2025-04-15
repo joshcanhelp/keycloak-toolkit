@@ -5,7 +5,7 @@ export const run = (rawJwt: string) => {
     Logger().error("Missing JWT in command args");
     Deno.exit(1);
   }
-  
+
   const [header, payload] = rawJwt.split(".");
 
   let payloadDecoded, headerDecoded;
