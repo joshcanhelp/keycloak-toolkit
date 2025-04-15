@@ -9,8 +9,7 @@ These commands are used to interact with public endpoints on the authorization s
 
 This command is used to pull down the public configuration data.
 
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run issuer config
 ```
@@ -19,8 +18,7 @@ $ deno task run issuer config
 
 This command is used to pull down the public key data.
 
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run issuer jwks
 

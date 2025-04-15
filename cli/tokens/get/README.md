@@ -11,12 +11,9 @@ These commands are used to obtain tokens.
 
 This command is used to get an access token for a client using a `client_credentials` grant.
 
-**Client requirements ([ref](https://github.com/joshcanhelp/keycloak-toolkit#start))**
+**[Client requirements](../../README.md#getting-started)**: 3️⃣ 4️⃣
 
-3️⃣, 4️⃣
-
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run token getwith client
 
@@ -38,12 +35,9 @@ $ deno task --quiet run token getwith client --output "expires_in"
 
 This command is used to get an access token for a client using an `authorization_code` grant. The command starts a server locally and outputs a URL to visit. Once you login, your browser should show a connection error and the outcome of the transaction will appear in the terminal.
 
-**Client requirements ([ref](https://github.com/joshcanhelp/keycloak-toolkit#start))**
+**[Client requirements](../../README.md#getting-started)**: 1️⃣ 2️⃣ 3️⃣
 
-1️⃣, 2️⃣, 3️⃣
-
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run token getwith code
 
@@ -58,12 +52,9 @@ $ deno task --quiet run token getwith code --output "access_token"
 
 This command is used to get new tokens for a user with a refresh token.
 
-**Client requirements ([ref](https://github.com/joshcanhelp/keycloak-toolkit#start))**
+**[Client requirements](../../README.md#getting-started)**: 3️⃣ 6️⃣
 
-3️⃣, 6️⃣
-
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run token getwith refresh __REFRESH_TOKEN_GOES_HERE__
 
@@ -75,12 +66,9 @@ $ deno task --quiet run token getwith refresh __REFRESH_TOKEN_GOES_HERE__ --outp
 
 This command is used to get tokens for a user with their username and password. This method is [insecure and should not be used in production](https://datatracker.ietf.org/doc/html/rfc9700#name-resource-owner-password-cre) but can be useful for getting access tokens for testing.
 
-**Client requirements ([ref](https://github.com/joshcanhelp/keycloak-toolkit#start))**
+**[Client requirements](../../README.md#getting-started)**: 3️⃣ 5️⃣
 
-3️⃣, 5️⃣
-
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run token getwith ropg
 

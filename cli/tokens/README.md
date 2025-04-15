@@ -10,12 +10,9 @@ These commands are used to obtain and interact with tokens.
 
 This command is used to see if a JWT-formatted token is valid or not.
 
-**Client requirements ([ref](https://github.com/joshcanhelp/keycloak-toolkit#start))**
+**[Client requirements](../README.md#getting-started)**: 3️⃣ if using the `--introspect` flag
 
-3️⃣ if using the `--introspect` flag
-
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run token verify __JWT_GOES_HERE__
 
@@ -30,8 +27,7 @@ $ deno task run token verify $(deno --quiet task run token get client --output a
 
 This command is used to see the contents of a token without checking whether a token is valid or not.
 
-**Examples**
-
+**Examples:**
 ```bash
 $ deno task run token decode __JWT_GOES_HERE__
 ```
