@@ -39,7 +39,7 @@ export const getConfig = () => {
   }
 
   const KEYCLOAK_REALM = Deno.env.get("KEYCLOAK_REALM") || "master";
-  const keycloakRealmUrl = `${keycloakBaseUrl}/realms/${KEYCLOAK_REALM}`;
+  const keycloakRealmUrl = `${keycloakBaseUrl}realms/${KEYCLOAK_REALM}`;
   const keycloakOidcUrl = `${keycloakRealmUrl}/protocol/openid-connect/`;
 
   configuration = {
