@@ -1,0 +1,17 @@
+{
+  "tasks": {
+    "run": "deno --env-file --allow-env --allow-net index.ts"
+  },
+  "imports": {
+    "@std/cli": "jsr:@std/cli@^1.0.15"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "include": ["./"]
+  }
+}
